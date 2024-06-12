@@ -39,6 +39,7 @@
         "example": "Can you tell me more about the specifications of this product?",
         "locale": "en-us",
         "patterns": [
+            "product details",
             "Can you tell me more about the specifications of this product?",
             "What are the features of this product?",
             "I need detailed information about this product.",
@@ -61,6 +62,7 @@
         "example": "What are your shipping options?",
         "locale": "en-us",
         "patterns": [
+            "shipping",
             "What are your shipping options?",
             "How long does shipping take?",
             "What is the cost of shipping?",
