@@ -15,3 +15,4 @@ class MachineLearningModel:
 
     def predict(self, X):
         return self.pipeline.predict(X)
+    

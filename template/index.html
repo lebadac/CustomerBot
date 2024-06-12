@@ -70,7 +70,7 @@
             success: function (data) {
                 var bot_response = data[0].text;
                 if (data[0].image) {
-                    bot_response += '<br><img src="' + data[0].image + '" alt="Image">';
+                    bot_response += '<br><img class ="img" src="' + data[0].image + '" alt="Image">';
                 }
                 addToChat("[BOT]:" + bot_response);
 
