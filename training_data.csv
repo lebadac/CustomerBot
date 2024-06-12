@@ -546,6 +546,7 @@ payment_issue,I have to report a payment issue,PAYMENT
 payment_issue,I am trying to report issues with payment,PAYMENT
 payment_issue,can you help me to solve issues with payment?,PAYMENT
 payment_issue,help me solving issues with payments,PAYMENT
+place_order,place order,ORDER
 place_order,I don't know how I can make a purchase,ORDER
 place_order,what do I have to do to buy something?,ORDER
 place_order,help me to make a purchase,ORDER
