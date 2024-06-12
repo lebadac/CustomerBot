@@ -437,19 +437,6 @@ delivery_period,I want to know about the delivery periods,DELIVERY
 delivery_period,I would like information about the delivery periods,DELIVERY
 delivery_period,I do not know how to check when my item is going to arrive,DELIVERY
 delivery_period,what is the delivery period for this order?,DELIVERY
-edit_account,can you hepl me correct the details on my profile?,ACCOUNT
-edit_account,how could I edit the information on my account?,ACCOUNT
-edit_account,I don't know how I can edit my account,ACCOUNT
-edit_account,i do not know how i can change the info on my profile,ACCOUNT
-edit_account,I need help to edit my account,ACCOUNT
-edit_account,help me editing my personal information,ACCOUNT
-edit_account,can I edit my account?,ACCOUNT
-edit_account,how to edit the information on my account?,ACCOUNT
-edit_account,I do not know how I can chanbe the info on my user account,ACCOUNT
-edit_account,i do not know how i can modify my user account,ACCOUNT
-edit_account,I want help editing the information on my account,ACCOUNT
-edit_account,I want assistance changing my personal details,ACCOUNT
-edit_account,how do I update the information on my user profile?,ACCOUNT
 get_invoice,I do not know how I could get the invoices from 7 months ago,INVOICE
 get_invoice,how do I get the invoices from 2 purchases ago?,INVOICE
 get_invoice,send me the invoices from one purchases ago,INVOICE
