@@ -30,6 +30,112 @@
             "Can you give me some details about the products you offer?",
             "What sorts of things can I buy from you?",
             "I'm curious about the range of products you have. Can you elaborate?"
+           
+        ]
+    },
+    "customer_service.product_details":{
+        "name": "customer_service.product_details",
+        "category": "product_information",
+        "example": "Can you tell me more about the specifications of this product?",
+        "locale": "en-us",
+        "patterns": [
+            "Can you tell me more about the specifications of this product?",
+            "What are the features of this product?",
+            "I need detailed information about this product.",
+            "What specifications does this product have?",
+            "Can you provide more details about this item?",
+            "What are the technical details of this product?",
+            "Tell me more about the features of this product.",
+            "What are the dimensions and weight of this product?",
+            "What materials is this product made of?",
+            "Can you describe the functionality of this product?",
+            "What kind of warranty does this product have?",
+            "Are there any special features of this product?"
+        ]
+    },
+    "customer_service.shipping":
+    {
+        "name": "customer_service.shipping",
+        "category": "shipping_information",
+        "example": "What are your shipping options?",
+        "locale": "en-us",
+        "patterns": [
+            "What are your shipping options?",
+            "How long does shipping take?",
+            "What is the cost of shipping?",
+            "Do you offer free shipping?",
+            "Can you ship internationally?",
+            "What shipping methods do you use?",
+            "How can I track my order?",
+            "What is the delivery time for this product?",
+            "Can I expedite my shipping?",
+            "What countries do you ship to?",
+            "What are the shipping rates?",
+            "Do you provide tracking numbers for shipments?"
+        ]
+    },
+    "customer_service.returns":
+    {
+        "name": "customer_service.returns",
+        "category": "returns_information",
+        "example": "What is your return policy?",
+        "locale": "en-us",
+        "patterns": [
+            "What is your return policy?",
+            "Can I return this product?",
+            "How do I return an item?",
+            "What is the process for returning a product?",
+            "Are there any return fees?",
+            "What is your exchange policy?",
+            "How long do I have to return an item?",
+            "Can I get a refund for this product?",
+            "What conditions apply to returns?",
+            "Do I need a receipt to return an item?",
+            "How can I exchange a product?",
+            "What is the procedure for returning a defective item?"
+        ]
+    },
+    "customer_service.support":
+    {
+        "name": "customer_service.support",
+        "category": "customer_support",
+        "example": "I need help with my order.",
+        "locale": "en-us",
+        "patterns": [
+            "I need help with my order.",
+            "Can you assist me with an issue?",
+            "How can I contact customer support?",
+            "I have a problem with my purchase.",
+            "Can you help me with a product issue?",
+            "Where can I get technical support?",
+            "I need assistance with my account.",
+            "Can you provide support for this product?",
+            "How do I get in touch with customer service?",
+            "I have a question about my order.",
+            "What should I do if I encounter a problem?",
+            "How can I get help with a technical issue?"
+        ]
+    },
+    "customer_service.say_goodbye": {
+        "name": "customer_service.say_goodbye",
+        "category": "farewell",
+        "example": "Goodbye",
+        "locale": "en-us",
+        "patterns": [
+            "Goodbye",
+            "Bye",
+            "See you later",
+            "Take care",
+            "Have a great day",
+            "Farewell",
+            "Talk to you soon",
+            "Catch you later",
+            "See you next time",
+            "Thanks, goodbye",
+            "It was nice talking to you, bye",
+            "Goodbye for now"
         ]
     }
 }
+
+    
