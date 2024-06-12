@@ -1,0 +1,35 @@
+{
+    "customer_service.say_hello": {
+        "name": "customer_service.say_hello",
+        "category": "introduction",
+        "example": "hello",
+        "locale": "en-us",
+        "patterns": [
+            "Hi",
+            "Hello",
+            "Good morning",
+            "Good afternoon",
+            "Good evening"
+        ]
+    },
+    "customer_service.introduction": {
+        "name": "customer_service.introduction",
+        "category": "introduction",
+        "example": "What types of products do you offer?",
+        "locale": "en-us",
+        "patterns": [
+            "What types of products do you offer?",
+            "Could you tell me about the products you offer?",
+            "I'm interested in your products. What can you tell me about them?",
+            "Can you provide information about the products you offer?",
+            "What kind of products does your company provide?",
+            "Do you have a catalog of your products?",
+            "I'd like to know more about the products available.",
+            "Could you give me an overview of your product range?",
+            "What are the main products your company sells?",
+            "Can you give me some details about the products you offer?",
+            "What sorts of things can I buy from you?",
+            "I'm curious about the range of products you have. Can you elaborate?"
+        ]
+    }
+}
