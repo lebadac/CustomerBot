@@ -50,7 +50,8 @@
             "What materials is this product made of?",
             "Can you describe the functionality of this product?",
             "What kind of warranty does this product have?",
-            "Are there any special features of this product?"
+            "Are there any special features of this product?",
+            "Can you recommend some product details?"
         ]
     },
     "customer_service.shipping":
