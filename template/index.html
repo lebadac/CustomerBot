@@ -1,54 +1,110 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        #chat_container {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            height: 100%;
+            padding: 10px;
+        }
+        #chat_content {
+            flex: 1;
+            width: 100%;
+            overflow-y: auto;
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        #suggestion_buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+        .suggestion_button {
+            padding: 5px 10px;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        #user_message, #btn_send {
+            margin-top: 10px;
+            padding: 5px 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+    </style>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 </head>
 <body>
-CHATBOT DEMO <br>
-<textarea id="chat_content" style="width: 300px; height: 150px;"></textarea>
-<br>
-<input type="text" id="user_message">
-<br>
-<button id="btn_send">Send</button>
+<div id="chat_container">
+    <div id="chat_content"></div>
+    <div id="suggestion_buttons"></div>
+    <input type="text" id="user_message" placeholder="Type your message...">
+    <button id="btn_send">Send</button>
+</div>
 <script>
-    function addToTextArea($ta, text) {
-        var val = $ta.val();
-        if (val) {
-            $ta.val(val + '\n' + text);
-        } else {
-            $ta.val(text);
-        }
-        $ta.scrollTop($ta[0].scrollHeight);
+    function addToChat(content) {
+        $('#chat_content').append('<div>' + content + '</div>');
+        $('#chat_content').scrollTop($('#chat_content')[0].scrollHeight);
     }
 
-    $('#user_message').keypress(function (event) {
-        var keycode = (event.keyCode ? event.keyCode : event.which);
-        if (keycode == '13') {
-            sendchat();
-        }
-    });
-
-    $('#btn_send').click(function() {
-        sendchat();
-    });
-
-    function sendchat() {
-        var user_message = $('#user_message').val();
+    function sendchat(message) {
         $('#user_message').val('');
-
-        addToTextArea($('#chat_content'), "[BẠN]:" + user_message);
+        addToChat("[BẠN]:" + message);
 
         $.ajax({
             type: 'POST',
             url: 'http://127.0.0.1:8080/chat', // Update the URL here
             contentType: 'application/json',
-            data: JSON.stringify({"message": user_message}),
+            data: JSON.stringify({"message": message}),
             success: function (data) {
-                addToTextArea($('#chat_content'), "[BOT]:" + data[0].text);
+                var bot_response = data[0].text;
+                if (data[0].image) {
+                    bot_response += '<br><img src="' + data[0].image + '" alt="Image">';
+                }
+                addToChat("[BOT]:" + bot_response);
+
+                // Remove existing suggestion buttons
+                $('#suggestion_buttons').empty();
+
+                // Add buttons for suggestions
+                if (data[0].suggestions) {
+                    var firstSuggestion = data[0].suggestions.shift(); // Get and remove the first suggestion
+                    $('#suggestion_buttons').append('<div class="suggestion_text">' + firstSuggestion + '</div>');
+                    data[0].suggestions.forEach(function(suggestion) {
+                        $('#suggestion_buttons').append('<button class="suggestion_button">' + suggestion + '</button>');
+                    });
+                }
+
+                // Attach click event to suggestion buttons
+                $('.suggestion_button').click(function() {
+                    var user_message = $(this).text();
+                    sendchat(user_message);
+                });
             }
         });
-
     }
+
+    $('#user_message').keypress(function (event) {
+        var keycode = (event.keyCode ? event.keyCode : event.which);
+        if (keycode == '13') {
+            sendchat($('#user_message').val());
+        }
+    });
+
+    $('#btn_send').click(function() {
+        sendchat($('#user_message').val());
+    });
 </script>
 </body>
 </html>

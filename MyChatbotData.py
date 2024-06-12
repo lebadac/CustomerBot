@@ -17,7 +17,12 @@ class MyChatbotData:
         self.df = pd.concat(dfs)
 
     def get_answer(self, intent):
-        return pd.unique(self.df[self.df['intent'] == intent]['answer'])[0]
+        answers = self.df[self.df['intent'] == intent]['answer']
+        unique_answers = [answer for answer in answers]
+        return unique_answers[0] if unique_answers else None
+
+
+
 
     def remove_punctuation(self, text):
         punct_re_escape = re.compile('[%s]' % re.escape('!"#$%&()*+,./:;<=>?@[\\]^_`{|}~'))
