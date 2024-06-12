@@ -39,7 +39,6 @@
         "example": "Can you tell me more about the specifications of this product?",
         "locale": "en-us",
         "patterns": [
-            "product details",
             "Can you tell me more about the specifications of this product?",
             "What are the features of this product?",
             "I need detailed information about this product.",

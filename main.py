@@ -1,15 +1,13 @@
 import json
 import csv
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify,  session
 from flask_cors import CORS
 from rule_based import rule_based_classifier
 from MyChatbotData import MyChatbotData
 from models.your_ml_model import MLClassifier
 import pandas as pd
 
-
 app = Flask(__name__)
-app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 CORS(app)  # Enable CORS for all routes by adding this line
 
 # Load training data from JSON file
@@ -194,48 +192,50 @@ def hello():
 
 from flask import session
 
-# Trong hàm xử lý tin nhắn
+
+
+# Set the secret key to protect the session
+app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
+
+# Initialize the global variable to control the getting_product_info state
+getting_product_info = False
+
 @app.route('/chat', methods=['POST'])
 def chat():
+    global getting_product_info
+    
     user_message = request.json.get('message')
-    # session['getting_product_info'] = True
-    # Kiểm tra xem người dùng có ở trong quá trình yêu cầu thông tin sản phẩm hay không
-    if session.get('getting_product_info'):
-        # Lấy từ khoá sản phẩm từ tin nhắn của người dùng
-
-        # Load dữ liệu từ tệp Amazon
+    
+    # Check if the user is requesting product information
+    if getting_product_info:
+        # Load Amazon data and get product info based on user message
         amazon_data = load_amazon_data('./recommend/amazon.csv')
-        # Lấy thông tin sản phẩm dựa trên từ khoá
         response = get_product_info(user_message, amazon_data)
-
-        # Xóa trạng thái yêu cầu thông tin sản phẩm
-        del session['getting_product_info']
-         # Ghi thông điệp vào console
+        
+        # Clear the product info request state
+        getting_product_info = False
         print("getting_product_info is True")
     else:
-         # Ghi thông điệp vào console
         print("getting_product_info is False")
-        # Rule-based classification
+        # Perform rule-based classification
         response = rule_based_classifier(user_message)
 
-        # Nếu bộ phân loại theo luật không xác định được, sử dụng bộ phân loại ML
         if response == "I don't know":
-            # Sử dụng bộ phân loại ML để dự đoán mục đích
+            # Use ML classifier to predict intent
             ml_intent = ml_classifier.predict(user_message)
-
-            # Lấy câu trả lời tương ứng với mục đích được dự đoán
             ml_response = answers.get(ml_intent)
 
-            # Nếu mục đích là lấy thông tin sản phẩm
+            # If the intent is to get product details
             if ml_intent == "customer_service.product_details":
-                # Đặt trạng thái yêu cầu thông tin sản phẩm
-                session['getting_product_info'] = True
+                # Set the product info request state
+                getting_product_info = True
                 print("getting_product_info is True")
                 response = {"text": "Sure! Please enter the product you want to know more about."}
             else:
                 response = ml_response
 
-    return jsonify([response])  # Đảm bảo phản hồi được bọc trong một danh sách
+    return jsonify([response])
+
 
 
 # Run the server
