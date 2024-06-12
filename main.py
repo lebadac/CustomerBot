@@ -1,4 +1,5 @@
 import json
+from recommendation import recommend_product as recommend_func
 import csv
 from flask import Flask, render_template, request, jsonify,  session
 from flask_cors import CORS
@@ -199,22 +200,30 @@ app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 
 # Initialize the global variable to control the getting_product_info state
 getting_product_info = False
-
+message_save = ""
 @app.route('/chat', methods=['POST'])
 def chat():
     global getting_product_info
-    
+    global message_save
     user_message = request.json.get('message')
-    
     # Check if the user is requesting product information
-    if getting_product_info:
-        # Load Amazon data and get product info based on user message
-        amazon_data = load_amazon_data('./recommend/amazon.csv')
-        response = get_product_info(user_message, amazon_data)
-        
-        # Clear the product info request state
-        getting_product_info = False
-        print("getting_product_info is True")
+    if getting_product_info or user_message.lower() == "yes":
+       
+        if getting_product_info:
+            # Load Amazon data and get product info based on user message
+            amazon_data = load_amazon_data('./recommend/amazon.csv')
+            response = get_product_info(user_message, amazon_data)
+            message_save = user_message
+            
+            # Clear the product info request state
+            getting_product_info = False
+        else:
+            recommend_product = True
+            if recommend_product:
+                print ("message_save", message_save)
+                 # Logic to recommend product based on preferences
+                response_text = recommend_func(message_save, './recommend/amazon.csv')
+                response = {"text": response_text }
     else:
         print("getting_product_info is False")
         # Perform rule-based classification
@@ -235,6 +244,7 @@ def chat():
                 response = ml_response
 
     return jsonify([response])
+
 
 
 
