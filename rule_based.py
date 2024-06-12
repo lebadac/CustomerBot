@@ -2,6 +2,7 @@ import re
 import csv
 import json  # Add this import statement for json
 from MyChatbotData import MyChatbotData
+from fuzzywuzzy import process
 from emoji import emoji_normalize, emoji_isolate, ascii_normalize
 
 
@@ -118,7 +119,8 @@ answers = {
         "suggestions": ["Is there anything else I can help you with your account?", "create account", "switch account"]
     },
     "delivery_options": {
-        "text": "🚚 To view the available delivery options for your order, simply go to the checkout page on our website. There you'll see a section that lists all the different shipping methods and timeframes we offer, along with the associated costs. Feel free to review the options and select the one that best suits your needs. If you have any trouble finding or understanding the delivery choices, our customer service team would be happy to provide more information and guidance. Just let me know if you need any assistance navigating the delivery options."
+        "text": "🚚 To view the available delivery options for your order, simply go to the checkout page on our website. There you'll see a section that lists all the different shipping methods and timeframes we offer, along with the associated costs. Feel free to review the options and select the one that best suits your needs. If you have any trouble finding or understanding the delivery choices, our customer service team would be happy to provide more information and guidance. Just let me know if you need any assistance navigating the delivery options.",
+         "suggestions": ["What do you want me to help with? 🤗", "cancel order", "change order", "buy item" ]
     },
     "delivery_period": {
         "text": "📦 To check the expected delivery timeline for your order, you can usually find that information on the order confirmation page or in your account's order history. There you'll see the estimated delivery date range based on the shipping method you selected. If you can't locate that detail, you're welcome to reach out to our customer support team and they'll be happy to look up the projected delivery period for your specific order. Just let us know the order number or other relevant details, and we'll provide that delivery timeline information."
@@ -192,3 +194,16 @@ def remove_punctuation(text):
 def rule_based_classifier(query):
     preprocessed_query = preprocess(query.lower())
     return exact_match(preprocessed_query)
+
+def fuzzy_matching_1(query):
+    intents = chatbot_data.get_intents()
+    for intent in intents:
+        phrases = chatbot_data.get_phrases(intent)
+        match, score = process.extractOne(query,  phrases )
+        if score > 90:
+            return chatbot_data.get_answer(intent)
+    return UNK
+
+def fuzzy_matching(query):
+    preprocessed_query = preprocess(query.lower())
+    return fuzzy_matching_1(preprocessed_query)

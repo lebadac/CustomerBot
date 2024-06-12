@@ -3,7 +3,8 @@ from recommendation import recommend_product as recommend_func
 import csv
 from flask import Flask, render_template, request, jsonify,  session
 from flask_cors import CORS
-from rule_based import rule_based_classifier
+from rule_based import rule_based_classifier 
+from rule_based import fuzzy_matching
 from MyChatbotData import MyChatbotData
 from models.your_ml_model import MLClassifier
 import pandas as pd
@@ -133,7 +134,8 @@ answers = {
         "suggestions": ["Is there anything else I can help you with your account?", "create account", "switch account"]
     },
     "delivery_options": {
-        "text": "🚚 To view the available delivery options for your order, simply go to the checkout page on our website. There you'll see a section that lists all the different shipping methods and timeframes we offer, along with the associated costs. Feel free to review the options and select the one that best suits your needs. If you have any trouble finding or understanding the delivery choices, our customer service team would be happy to provide more information and guidance. Just let me know if you need any assistance navigating the delivery options."
+        "text": "🚚 To view the available delivery options for your order, simply go to the checkout page on our website. There you'll see a section that lists all the different shipping methods and timeframes we offer, along with the associated costs. Feel free to review the options and select the one that best suits your needs. If you have any trouble finding or understanding the delivery choices, our customer service team would be happy to provide more information and guidance. Just let me know if you need any assistance navigating the delivery options.",
+        "suggestions": ["What do you want me to help with? 🤗", "cancel order", "change order", "buy item" ]
     },
     "delivery_period": {
         "text": "📦 To check the expected delivery timeline for your order, you can usually find that information on the order confirmation page or in your account's order history. There you'll see the estimated delivery date range based on the shipping method you selected. If you can't locate that detail, you're welcome to reach out to our customer support team and they'll be happy to look up the projected delivery period for your specific order. Just let us know the order number or other relevant details, and we'll provide that delivery timeline information."
@@ -227,21 +229,28 @@ def chat():
     else:
         print("getting_product_info is False")
         # Perform rule-based classification
+        # Perform rule-based classification
         response = rule_based_classifier(user_message)
 
-        if response == "I don't know":
-            # Use ML classifier to predict intent
-            ml_intent = ml_classifier.predict(user_message)
-            ml_response = answers.get(ml_intent)
-
-            # If the intent is to get product details
-            if ml_intent == "customer_service.product_details":
-                # Set the product info request state
-                getting_product_info = True
-                print("getting_product_info is True")
-                response = {"text": "Sure! Please enter the product you want to know more about."}
+        # If the rule-based classifier doesn't know the answer
+        if response ==  "I don't know":
+            # Use fuzzy matching
+            fuzzy_response = fuzzy_matching(user_message)
+            print ("Hi",fuzzy_response )
+            # If fuzzy matching found a match
+            if fuzzy_response != "I don't know":
+                response = fuzzy_response
             else:
-                response = ml_response
+                # Use ML classifier to predict intent
+                ml_intent = ml_classifier.predict(user_message)
+                response = answers.get(ml_intent)
+                # If the intent is to get product details
+                if ml_intent == "customer_service.product_details":
+                    # Set the product info request state
+                    getting_product_info = True
+                    print("getting_product_info is True")
+                    response = {"text": "Sure! Please enter the product you want to know more about."}
+                    
 
     return jsonify([response])
 
