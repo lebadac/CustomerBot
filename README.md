@@ -2,7 +2,7 @@
  <h1 align="center">FusionBot</h1>
 </p>
 
-## Team member
+## Team members
 * Lê Bá Đắc
 * Nguyễn Thanh Quỳnh Tiên
 * Dương Lý Tuyết Mai
