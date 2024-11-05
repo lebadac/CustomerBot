@@ -19,8 +19,9 @@ The script and demo will be released soon
 
 ## Dataset
 The datasets used for training FusionBot are available here:
-* **Rule-Based and Machine Learning Training Data**: Our custom dataset, built for training rule-based and machine learning models, is available at [Own Dataset]https://github.com/lebadac/FusionBot/blob/main/training_sample.json.
-* **Recommendation System Dataset**: The dataset used for the recommendation system technology is from Kaggle and can be accessed at [Kaggle Dataset]https://www.kaggle.com/datasets/scodepy/customer-support-intent-dataset.
+* **Rule-Based and Machine Learning Training Data**: Our custom dataset, built for training rule-based and machine learning models, is available at [Own Dataset](https://github.com/lebadac/FusionBot/blob/main/training_sample.json)
+
+* **Recommendation System Dataset**: The dataset used for the recommendation system technology is from Kaggle and can be accessed at [Kaggle Dataset](https://www.kaggle.com/datasets/scodepy/customer-support-intent-dataset).
 
 ##Technology Stack
 * **Rule-Based System**: Handles straightforward and frequently asked questions for quick, accurate responses.
