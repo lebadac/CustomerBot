@@ -1,11 +1,12 @@
 <p align="center">
  <h1 align="center">FusionBot</h1>
 </p>
+
 ## Team member
-Lê Bá Đắc
-Nguyễn Thanh Quỳnh Tiên
-Dương Lý Tuyết Mai
-Nguyễn Thiện Bảo Châu
+* Lê Bá Đắc
+* Nguyễn Thanh Quỳnh Tiên
+* Dương Lý Tuyết Mai
+* Nguyễn Thiện Bảo Châu
 
 ## Introduction
 
