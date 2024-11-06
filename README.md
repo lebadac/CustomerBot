@@ -15,7 +15,11 @@ Here is my python source code for CustomerBot - a chatbot combines rule-based re
 * **Receive tailored product recommendations based on your specific needs and preferences**
 
 ## CustomerBot
-![CustomerBot Demo](CustomerBot.gif)
+
+<div align="center">
+  <img src="CustomerBot.gif" alt="CustomerBot Demo" />
+</div>
+
 
 
 ## Dataset
